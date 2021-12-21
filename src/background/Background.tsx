@@ -18,12 +18,15 @@ const StyledBackground = styled.div(({ tempSrc }: { tempSrc: string }) => ({
     backgroundImage: tempSrc,
     width: '100vw',
     height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
 }));
 const Bar = styled.div(({ place }: { place: 'top' | 'bottom' }) => ({
     backgroundColor: 'black',
     height: '10vh',
-    width: '100%',
+    width: '100vw',
     position: 'absolute',
     zIndex: 0,
-    ...(place == 'top' ? { top: '0px' } : { bottom: '0px' }),
+    ...(place === 'top' ? { top: '0px' } : { bottom: '0px' }),
 }));

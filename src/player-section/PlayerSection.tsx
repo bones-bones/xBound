@@ -4,6 +4,7 @@ import { generate as generateGeoPattern } from 'geopattern';
 import Vendstar3000 from '../images/vendstar3000.png';
 import Horse from '../images/horse.png';
 import Civic from '../images/2019 honda civic.png';
+import { Targetable } from '../targetable';
 
 interface Character {
     name: string;
@@ -31,10 +32,10 @@ const PlayerRow = styled.div({
     display: 'flex',
     flexDirection: 'row',
     zIndex: 1,
-    width: '100%',
     justifyContent: 'space-evenly',
     bottom: '0px',
     position: 'fixed',
+    width: '1000px',
 });
 
 const CharacterElement = ({
@@ -45,12 +46,14 @@ const CharacterElement = ({
     const tempSrc = generateGeoPattern(name, { color: '#FFA500' }).toDataUrl();
     return (
         <CharacterContainer>
-            <CharacterImage src={image} />
-            <CharacterDiv tempSrc={tempSrc}>
-                <Name>{name}</Name>
-                <HP value={hp} />
-                <SP value={sp} />
-            </CharacterDiv>
+            <Targetable>
+                <CharacterImage src={image} />
+                <CharacterDiv tempSrc={tempSrc}>
+                    <Name>{name}</Name>
+                    <HP value={hp} />
+                    <SP value={sp} />
+                </CharacterDiv>
+            </Targetable>
         </CharacterContainer>
     );
 };
@@ -70,7 +73,6 @@ const CharacterDiv = styled.div(({ tempSrc }: { tempSrc: string }) => ({
     alignItems: 'center',
     backgroundSize: '100px',
     height: '100px',
-
     border: '3px solid white',
     borderRadius: '15px',
 }));

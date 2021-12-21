@@ -4,21 +4,17 @@ import { Background } from '../background';
 import { PlayerSection } from '../player-section';
 import { StarBar } from '../star-bar';
 import { Menu } from './Menu';
+import { EnemySection } from '../enemy-section';
 
 export const Battlefield = () => {
     return (
         <>
             <Background>
-                <Zdiv>
-                    <Menu />
-                    <EnemySection />
-                    <StarBar />
-                    <PlayerSection />
-                </Zdiv>
+                <Menu />
+                <EnemySection />
+                <StarBar />
+                <PlayerSection />
             </Background>
         </>
     );
 };
-
-const EnemySection = styled.div();
-const Zdiv = styled.div();
