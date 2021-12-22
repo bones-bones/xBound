@@ -1,25 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { generate as generateGeoPattern } from 'geopattern';
-import Vendstar3000 from '../images/vendstar3000.png';
-import Horse from '../images/horse.png';
-import Civic from '../images/2019 honda civic.png';
+
 import { Targetable } from '../targetable';
 import { useSelector } from 'react-redux';
 import { selectStats } from '../stats';
 import { getCharacterDefinitionForId } from '../data/player-characters/definitions';
-
-interface Character {
-    name: string;
-    hp: number;
-    sp: number;
-    image: string;
-}
-const characters: Character[] = [
-    { name: '2019 Civic', hp: 35, sp: 44, image: Civic },
-    { name: 'Double Ron', hp: 200, sp: 4, image: Horse },
-    { name: 'Vendstar3k', hp: 11, sp: 21, image: Vendstar3000 },
-];
 
 export const PlayerSection = () => {
     const playerStats = useSelector(selectStats);

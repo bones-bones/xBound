@@ -1,13 +1,18 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Building from '../images/building.png';
 import { Targetable } from '../targetable';
+import { useSelector } from 'react-redux';
+import { selectBattle } from '../battlefield';
+import { getEnemyDefinitionForId } from '../data/enemy-characters/definition';
 
 export const EnemySection = () => {
+    const battle = useSelector(selectBattle);
+    const enemy = battle.enemies[0];
+    const info = getEnemyDefinitionForId(enemy.id);
     return (
         <Container>
             <Targetable>
-                <img src={Building} width={'600px'} height={'325px'} />
+                <img src={info.image} height={'300px'} alt={info.id} />
             </Targetable>
         </Container>
     );
@@ -15,7 +20,7 @@ export const EnemySection = () => {
 
 const Container = styled.div({
     display: 'flex',
-    alignItems: 'center',
-    width: '60%',
+    justifyContent: 'center',
+    width: '100%',
     height: '60%',
 });

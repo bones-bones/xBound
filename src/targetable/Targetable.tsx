@@ -1,4 +1,4 @@
-import React, { ReactChildren } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import Star from '../images/star.png';
 

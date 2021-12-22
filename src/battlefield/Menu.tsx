@@ -7,14 +7,12 @@ const actions = ['🔨 crash', '✰ star', '📦 items', '💭 plan'];
 export const Menu = () => {
     return (
         <MenuContainer>
-            {actions.map((entry) => {
-                return (
-                    <MenuItemMenu
-                        key={entry}
-                        text={entry.toUpperCase()}
-                    ></MenuItemMenu>
-                );
-            })}
+            {actions.map((entry) => (
+                <MenuItemMenu
+                    key={entry}
+                    text={entry.toUpperCase()}
+                ></MenuItemMenu>
+            ))}
         </MenuContainer>
     );
 };

@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { reducer as statsReducer } from './stats';
+import { reducer as battleReducer } from './battlefield';
 
 export const store = configureStore({
     reducer: combineReducers({
         stats: statsReducer,
+        battle: battleReducer,
     }),
 });
 

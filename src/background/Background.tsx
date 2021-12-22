@@ -21,12 +21,13 @@ const StyledBackground = styled.div(({ tempSrc }: { tempSrc: string }) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    zIndex: -2,
 }));
 const Bar = styled.div(({ place }: { place: 'top' | 'bottom' }) => ({
     backgroundColor: 'black',
     height: '10vh',
     width: '100vw',
     position: 'absolute',
-    zIndex: 0,
+    // zIndex: -1,
     ...(place === 'top' ? { top: '0px' } : { bottom: '0px' }),
 }));
