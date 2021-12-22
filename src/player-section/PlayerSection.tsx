@@ -5,6 +5,9 @@ import Vendstar3000 from '../images/vendstar3000.png';
 import Horse from '../images/horse.png';
 import Civic from '../images/2019 honda civic.png';
 import { Targetable } from '../targetable';
+import { useSelector } from 'react-redux';
+import { selectStats } from '../stats';
+import { getCharacterDefinitionForId } from '../data/player-characters/definitions';
 
 interface Character {
     name: string;
@@ -19,10 +22,11 @@ const characters: Character[] = [
 ];
 
 export const PlayerSection = () => {
+    const playerStats = useSelector(selectStats);
     return (
         <PlayerRow>
-            {characters.map((entry) => {
-                return <CharacterElement key={entry.name} character={entry} />;
+            {playerStats.characters.map((entry) => {
+                return <CharacterElement key={entry.id} character={entry} />;
             })}
         </PlayerRow>
     );
@@ -39,17 +43,20 @@ const PlayerRow = styled.div({
 });
 
 const CharacterElement = ({
-    character: { name, hp, sp, image },
+    character: { id, hp, sp },
 }: {
-    character: Character;
+    character: { id: string; hp: number; sp: number };
 }) => {
-    const tempSrc = generateGeoPattern(name, { color: '#FFA500' }).toDataUrl();
+    const characterDefinition = getCharacterDefinitionForId(id);
+    const tempSrc = generateGeoPattern(characterDefinition.name, {
+        color: '#FFA500',
+    }).toDataUrl();
     return (
         <CharacterContainer>
             <Targetable>
-                <CharacterImage src={image} />
+                <CharacterImage src={characterDefinition.image} />
                 <CharacterDiv tempSrc={tempSrc}>
-                    <Name>{name}</Name>
+                    <Name>{characterDefinition.name}</Name>
                     <HP value={hp} />
                     <SP value={sp} />
                 </CharacterDiv>
