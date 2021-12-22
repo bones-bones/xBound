@@ -4,14 +4,16 @@ import styled from '@emotion/styled';
 export const StarBar = () => {
     return (
         <Container>
-            <div> {'⭐️'}</div>
-            <PointBar>
+            <BarContainer>
                 <div> {'⭐️'}</div>
-                <div> {'⭐️'}</div>
-            </PointBar>
-            <WrapperBar barHeight={450}>
-                <FilledBar barHeight={300} />
-            </WrapperBar>
+                <PointBar>
+                    <div> {'⭐️'}</div>
+                    <div> {'⭐️'}</div>
+                </PointBar>
+                <WrapperBar barHeight={450}>
+                    <FilledBar barHeight={300} />
+                </WrapperBar>
+            </BarContainer>
         </Container>
     );
 };
@@ -42,9 +44,9 @@ const FilledBar = styled.div(({ barHeight }: { barHeight: number }) => ({
 const Container = styled.div({
     right: '20px',
     position: 'fixed',
-    top: '200px',
-    borderRadius: '10px',
-    overflow: 'hidden',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
 });
 
 const WrapperBar = styled.div(({ barHeight }: { barHeight: number }) => ({
@@ -54,3 +56,11 @@ const WrapperBar = styled.div(({ barHeight }: { barHeight: number }) => ({
     alignItems: 'flex-end',
     backgroundColor: '#660000',
 }));
+
+const BarContainer = styled.div({
+    borderRadius: '10px',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+});
