@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Battlefield } from './battlefield';
 import { KeyOrder } from './action-components/KeyOrder';
 import { KeyHold } from './action-components/KeyHold';
+import { KeyTap } from './action-components/KeyTap';
 
 function App() {
     return (
@@ -26,6 +27,17 @@ function App() {
                         <KeyHold
                             keyValue="left"
                             time={3000}
+                            successCallback={() => console.log('good')}
+                            failureCallback={() => console.log('bad')}
+                        />
+                    }
+                />
+                <Route
+                    path="/keyTap"
+                    element={
+                        <KeyTap
+                            keyValue="a"
+                            time={1000}
                             successCallback={() => console.log('good')}
                             failureCallback={() => console.log('bad')}
                         />
