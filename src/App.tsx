@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Battlefield } from './battlefield';
 import { KeyOrder } from './action-components/KeyOrder';
+import { KeyHold } from './action-components/KeyHold';
 
 function App() {
     return (
@@ -13,19 +13,21 @@ function App() {
                     path="/keyOrder"
                     element={
                         <KeyOrder
-                            time={5000}
-                            successCallback={() => alert('good')}
-                            failureCallback={() => alert('bad')}
-                            chain={[
-                                'up',
-                                'up',
-                                'down',
-                                'down',
-                                'left',
-                                'right',
-                                'left',
-                                'right',
-                            ]}
+                            time={10000}
+                            successCallback={() => console.log('good')}
+                            failureCallback={() => console.log('bad')}
+                            chain={['up', 'down', 'left', 'right']}
+                        />
+                    }
+                />
+                <Route
+                    path="/keyHold"
+                    element={
+                        <KeyHold
+                            keyValue="left"
+                            time={3000}
+                            successCallback={() => console.log('good')}
+                            failureCallback={() => console.log('bad')}
                         />
                     }
                 />
