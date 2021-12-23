@@ -7,11 +7,28 @@ export const KeyHold: React.FC<{
     time: number;
     successCallback: () => void;
     failureCallback: () => void;
-}> = ({ keyValue, time, successCallback, failureCallback }) => {
+    RenderableComponent: React.FC<{
+        time: number;
+        timeCount: number;
+        keyValue: string;
+        active: boolean;
+    }>;
+}> = ({
+    keyValue,
+    time,
+    successCallback,
+    failureCallback,
+    RenderableComponent,
+}) => {
     const [timeCount, setTimeCount] = useState<number>(0);
     useRequestInterval(() => {
         if (listening) {
             setTimeCount(500 + timeCount);
+
+            if (500 + timeCount > time) {
+                failureCallback();
+                setTimeCount(0);
+            }
             console.log(timeCount);
         }
     }, 500);
@@ -20,8 +37,15 @@ export const KeyHold: React.FC<{
 
     return (
         <>
-            <span>{keyValue}</span>
-            {listening && <span>{getFilledDots(time, timeCount)}</span>}
+            {
+                <RenderableComponent
+                    time={time}
+                    timeCount={timeCount}
+                    keyValue={keyValue}
+                    active={listening}
+                />
+            }
+
             {!listening ? (
                 <KeyboardEventHandler
                     handleKeys={[keyValue]}
@@ -44,6 +68,7 @@ export const KeyHold: React.FC<{
                         } else {
                             failureCallback();
                         }
+                        setTimeCount(0);
 
                         setListening(false);
                     }}
@@ -51,14 +76,4 @@ export const KeyHold: React.FC<{
             )}
         </>
     );
-};
-
-const getFilledDots = (time: number, timeCount: number) => {
-    const timeTotal = time / 500;
-    const timeCountTotal = timeCount / 500;
-
-    return new Array(timeCountTotal)
-        .fill('◉')
-        .concat(new Array(Math.max(timeTotal - timeCountTotal, 0)).fill('〇'))
-        .join('-');
 };

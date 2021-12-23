@@ -4,6 +4,7 @@ import { Battlefield } from './battlefield';
 import { KeyOrder } from './action-components/KeyOrder';
 import { KeyHold } from './action-components/KeyHold';
 import { KeyTap } from './action-components/KeyTap';
+import { Hold } from './action-components/Hold';
 
 function App() {
     return (
@@ -26,9 +27,10 @@ function App() {
                     element={
                         <KeyHold
                             keyValue="left"
-                            time={3000}
+                            time={2000}
                             successCallback={() => console.log('good')}
                             failureCallback={() => console.log('bad')}
+                            RenderableComponent={Hold}
                         />
                     }
                 />

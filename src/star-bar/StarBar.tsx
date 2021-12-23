@@ -5,10 +5,10 @@ export const StarBar = () => {
     return (
         <Container>
             <BarContainer>
-                <div> {'⭐️'}</div>
+                <div>{'⭐️'}</div>
                 <PointBar>
-                    <div> {'⭐️'}</div>
-                    <div> {'⭐️'}</div>
+                    <div>{'⭐️'}</div>
+                    <div>{'⭐️'}</div>
                 </PointBar>
                 <WrapperBar barHeight={450}>
                     <FilledBar barHeight={300} />
