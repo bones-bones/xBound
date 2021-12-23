@@ -1,3 +1,4 @@
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import React from 'react';
 export const Hold = ({
@@ -12,7 +13,7 @@ export const Hold = ({
     active: boolean;
 }) => {
     return (
-        <Container>
+        <Container val={timeCount}>
             <ArrowContainer isActive={active}>
                 {keyMappings[keyValue]}
             </ArrowContainer>
@@ -45,6 +46,26 @@ const getFilledDots = (time: number, timeCount: number) => {
 // 3840 4080 240
 
 const colors = ['#F00', '#FFA500', '#FF0', '#0F0'];
+const shake = (intensity: number) => {
+    const ver = (intensity > 0 ? 1 : 0) * intensity;
+    return keyframes({
+        '10%, 90%': {
+            transform: `translate3d(0, ${ver}px, 0)`,
+        },
+
+        '20%, 80% ': {
+            transform: `translate3d(0, -${ver}px, 0)`,
+        },
+
+        '30%, 50%, 70%': {
+            transform: `translate3d(0, ${ver}px, 0)`,
+        },
+
+        '40%, 60%': {
+            transform: `translate3d(0, -${ver}px, 0)`,
+        },
+    });
+};
 
 const keyMappings: Record<string, string> = {
     left: '⬅',
@@ -52,7 +73,7 @@ const keyMappings: Record<string, string> = {
     up: '⬆',
     down: '⬇',
 };
-const Container = styled.div({
+const Container = styled.div(({ val }: { val: number }) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -62,9 +83,10 @@ const Container = styled.div({
     borderRadius: '5px',
     border: '1px solid yellow',
     height: '30px',
-});
+    animation: `${shake(val / 250)} 0.5s infinite`,
+}));
 const ArrowContainer = styled.div(({ isActive }: { isActive: boolean }) => ({
-    color: !isActive ? 'white' : 'black',
+    color: isActive ? 'black' : 'white',
 }));
 
 const DotContainer = styled.div({
