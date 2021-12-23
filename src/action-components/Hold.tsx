@@ -26,10 +26,16 @@ const getFilledDots = (time: number, timeCount: number) => {
 
     return new Array(timeCountTotal)
         .fill(undefined)
-        .map((entry, index) => <Dot key={index} color={colors[index]} />)
+        .map((entry, index) => (
+            <DotContainer key={index}>
+                <Dot color={colors[index]} />
+            </DotContainer>
+        ))
         .concat(
             new Array(Math.max(timeTotal - timeCountTotal, 0)).fill(
-                <Dot color={'black'} />
+                <DotContainer>
+                    <Dot color={'black'} />
+                </DotContainer>
             )
         );
 };
@@ -58,12 +64,19 @@ const Container = styled.div({
     height: '30px',
 });
 const ArrowContainer = styled.div(({ isActive }: { isActive: boolean }) => ({
-    color: isActive ? 'white' : 'black',
+    color: !isActive ? 'white' : 'black',
 }));
 
-const Dot = styled.div(({ color }: { color: string }) => ({
+const DotContainer = styled.div({
     height: '20px',
     width: '20px',
+    alignItems: 'center',
+    display: 'flex',
+});
+
+const Dot = styled.div(({ color }: { color: string }) => ({
+    height: color == 'black' ? '10px' : '20px',
+    width: color == 'black' ? '10px' : '20px',
     backgroundColor: color,
     borderRadius: '15px',
 }));
