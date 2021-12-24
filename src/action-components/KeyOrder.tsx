@@ -8,7 +8,17 @@ export const KeyOrder: React.FC<{
     time: number;
     successCallback: () => void;
     failureCallback: () => void;
-}> = ({ chain, time, successCallback, failureCallback }) => {
+    RenderableComponent: React.FC<{
+        input: string[];
+        chain: string[];
+    }>;
+}> = ({
+    chain,
+    time,
+    successCallback,
+    failureCallback,
+    RenderableComponent,
+}) => {
     const [input, setInput] = useState<string[]>([]);
     useTimeout(failureCallback, time);
 
@@ -21,7 +31,6 @@ export const KeyOrder: React.FC<{
 
     return (
         <>
-            <span>{formatInput(chain)}</span>
             <KeyboardEventHandler
                 handleKeys={uniqueKeys}
                 onKeyEvent={(key) => {
@@ -33,28 +42,19 @@ export const KeyOrder: React.FC<{
                             isValid = false;
                         }
                     }
-
                     if (!isValid) {
                         failureCallback();
                         setInput([]);
                         return;
                     }
-
                     if (chain.length === values.length) {
                         setInput([]);
                         successCallback();
                     }
                 }}
             />
-            <Container>{formatInput(input)}</Container>
+
+            <RenderableComponent input={input} chain={chain} />
         </>
     );
 };
-const Container = styled.div({
-    height: '30px',
-    backgroundColor: 'black',
-    color: 'white',
-    zIndex: 5,
-});
-
-const formatInput = (str: string[]) => str.map((e) => `(${e})`).join(' - ');

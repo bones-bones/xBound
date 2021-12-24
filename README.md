@@ -8,3 +8,16 @@ To do:
 [ ] Fix Targatable component
 [ ] Implement keystroke listener
 [ ] Battle menus need UI work
+
+UI
+[ ] make player menu not bad
+[ ] add focusability to chars
+[ ] add motion to order
+[ ] add motion to tap (maybe change to bar)
+
+State
+[ ] basic battle state
+
+HP component
+[ ] create
+[ ] write a thunk. Consider secondary HP state

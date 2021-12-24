@@ -6,6 +6,12 @@ import { Targetable } from '../targetable';
 import { useSelector } from 'react-redux';
 import { selectStats } from '../stats';
 import { getCharacterDefinitionForId } from '../data/player-characters/definitions';
+import { KeyHold } from '../action-components/KeyHold';
+import { Hold } from '../action-components/Hold';
+import { KeyTap } from '../action-components/KeyTap';
+import { Tap } from '../action-components/Tap';
+import { KeyOrder } from '../action-components/KeyOrder';
+import { Order } from '../action-components/Order';
 
 export const PlayerSection = () => {
     const playerStats = useSelector(selectStats);
@@ -24,6 +30,7 @@ const PlayerRow = styled.div({
     zIndex: 1,
     justifyContent: 'space-evenly',
     bottom: '0px',
+    alignItems: 'flex-end',
     position: 'fixed',
     width: '1000px',
 });
@@ -39,6 +46,33 @@ const CharacterElement = ({
     }).toDataUrl();
     return (
         <CharacterContainer>
+            {id === 'car' && (
+                <KeyHold
+                    keyValue="left"
+                    time={2000}
+                    successCallback={() => console.log('good')}
+                    failureCallback={() => console.log('bad')}
+                    RenderableComponent={Hold}
+                />
+            )}
+            {id === 'horse' && (
+                <KeyTap
+                    keyValue="a"
+                    time={1000}
+                    successCallback={() => console.log('good')}
+                    failureCallback={() => console.log('bad')}
+                    RenderableComponent={Tap}
+                />
+            )}
+            {id === 'vending' && (
+                <KeyOrder
+                    time={10000}
+                    successCallback={() => console.log('good')}
+                    failureCallback={() => console.log('bad')}
+                    chain={['up', 'down', 'left', 'right']}
+                    RenderableComponent={Order}
+                />
+            )}
             <Targetable>
                 <CharacterImage src={characterDefinition.image} />
                 <CharacterDiv tempSrc={tempSrc}>

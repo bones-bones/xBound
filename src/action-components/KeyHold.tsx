@@ -63,7 +63,7 @@ export const KeyHold: React.FC<{
                     onKeyEvent={() => {
                         console.log('event');
 
-                        if (timeCount == time) {
+                        if (timeCount === time) {
                             successCallback();
                         } else {
                             failureCallback();

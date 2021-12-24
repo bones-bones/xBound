@@ -5,6 +5,8 @@ import { KeyOrder } from './action-components/KeyOrder';
 import { KeyHold } from './action-components/KeyHold';
 import { KeyTap } from './action-components/KeyTap';
 import { Hold } from './action-components/Hold';
+import { Tap } from './action-components/Tap';
+import { Order } from './action-components/Order';
 
 function App() {
     return (
@@ -19,6 +21,7 @@ function App() {
                             successCallback={() => console.log('good')}
                             failureCallback={() => console.log('bad')}
                             chain={['up', 'down', 'left', 'right']}
+                            RenderableComponent={Order}
                         />
                     }
                 />
@@ -42,6 +45,7 @@ function App() {
                             time={1000}
                             successCallback={() => console.log('good')}
                             failureCallback={() => console.log('bad')}
+                            RenderableComponent={Tap}
                         />
                     }
                 />
