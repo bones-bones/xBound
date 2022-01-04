@@ -12,6 +12,7 @@ import { KeyTap } from '../action-components/KeyTap';
 import { Tap } from '../action-components/Tap';
 import { KeyOrder } from '../action-components/KeyOrder';
 import { Order } from '../action-components/Order';
+import { Damageable } from '../damageable';
 
 export const PlayerSection = () => {
     const playerStats = useSelector(selectStats);
@@ -74,12 +75,19 @@ const CharacterElement = ({
                 />
             )}
             <Targetable>
-                <CharacterImage src={characterDefinition.image} />
-                <CharacterDiv tempSrc={tempSrc}>
-                    <Name>{characterDefinition.name}</Name>
-                    <HP value={hp} />
-                    <SP value={sp} />
-                </CharacterDiv>
+                <Damageable
+                    damage={true}
+                    RenderableComponent={
+                        <>
+                            <CharacterImage src={characterDefinition.image} />
+                            <CharacterDiv tempSrc={tempSrc}>
+                                <Name>{characterDefinition.name}</Name>
+                                <HP value={hp} />
+                                <SP value={sp} />
+                            </CharacterDiv>
+                        </>
+                    }
+                ></Damageable>
             </Targetable>
         </CharacterContainer>
     );
@@ -107,7 +115,7 @@ const CharacterDiv = styled.div(({ tempSrc }: { tempSrc: string }) => ({
 const HP = ({ value }: { value: number }) => {
     return (
         <HPContainer>
-            <HPText>HP</HPText> {value}
+            <HPText>HP</HPText> {('' + value).split('')}
         </HPContainer>
     );
 };

@@ -29,19 +29,21 @@ export const Order = ({
 };
 
 const BarContainer = styled.div({
-    height: '40px',
+    height: '30px',
     width: '150px',
-    borderRadius: '10px',
     backgroundColor: '#660000',
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
     fontSize: '20px',
+    borderRadius: '5px',
+    border: '1px solid yellow',
+    lineHeight: '30px',
 });
 
 const Character = styled.div(({ divColor }: { divColor: string }) => ({
     color: divColor,
-    height: '20px',
+    height: '30px',
     width: '20px',
 }));
 
