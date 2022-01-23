@@ -13,6 +13,7 @@ import { Tap } from '../action-components/Tap';
 import { KeyOrder } from '../action-components/KeyOrder';
 import { Order } from '../action-components/Order';
 import { Damageable } from '../damageable';
+import { HPContainer } from './HPContainer';
 
 export const PlayerSection = () => {
     const playerStats = useSelector(selectStats);
@@ -82,7 +83,7 @@ const CharacterElement = ({
                             <CharacterImage src={characterDefinition.image} />
                             <CharacterDiv tempSrc={tempSrc}>
                                 <Name>{characterDefinition.name}</Name>
-                                <HP value={hp} />
+                                <HPContainer value={hp} modifyNumber={-5} />
                                 <SP value={sp} />
                             </CharacterDiv>
                         </>
@@ -111,21 +112,6 @@ const CharacterDiv = styled.div(({ tempSrc }: { tempSrc: string }) => ({
     border: '3px solid white',
     borderRadius: '15px',
 }));
-
-const HP = ({ value }: { value: number }) => {
-    return (
-        <HPContainer>
-            <HPText>HP</HPText> {('' + value).split('')}
-        </HPContainer>
-    );
-};
-
-const HPContainer = styled.div({
-    display: 'block',
-    fontFamily: 'Fipps',
-});
-
-const HPText = styled.span({ color: 'white' });
 
 const SP = ({ value }: { value: number }) => {
     return (

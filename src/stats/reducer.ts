@@ -27,5 +27,19 @@ export const { actions, reducer } = createSlice({
         loadInitial: (state, { payload }: PayloadAction<{ value: number }>) => {
             state.totalSp = payload.value;
         },
+        dealDamage: (
+            state,
+            {
+                payload: { target, value },
+            }: PayloadAction<{ target: string; value: number }>
+        ) => {
+            const targetCharacter = state.characters.find(
+                ({ id }) => id === target
+            );
+
+            if (targetCharacter) {
+                targetCharacter.hp -= value;
+            }
+        },
     },
 });

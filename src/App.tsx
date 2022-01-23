@@ -7,12 +7,20 @@ import { KeyTap } from './action-components/KeyTap';
 import { Hold } from './action-components/Hold';
 import { Tap } from './action-components/Tap';
 import { Order } from './action-components/Order';
+import { useDispatch } from 'react-redux';
+import { actions } from './stats';
 
-function App() {
+export const App = () => {
+    const dispatch = useDispatch();
+    setInterval(
+        () => dispatch(actions.dealDamage({ target: 'car', value: 1 })),
+        500
+    );
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Battlefield />} />
+
                 <Route
                     path="/keyOrder"
                     element={
@@ -52,6 +60,4 @@ function App() {
             </Routes>
         </BrowserRouter>
     );
-}
-
-export default App;
+};
